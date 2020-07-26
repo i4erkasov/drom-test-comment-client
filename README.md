@@ -17,10 +17,11 @@ text - тип string.
 Сервер example.com писать не надо! Только библиотеку для работы с ним.
 ___
 Установка:
-
+```
 composer require i4erkasov/drom-test-comment-client
+```
 
-Пример использования: 
+Использование: 
 
 ```php
 
