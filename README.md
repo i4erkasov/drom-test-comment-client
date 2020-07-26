@@ -15,18 +15,13 @@ text - тип string.
 
 Написать phpunit тесты, на которых будет проверяться работоспособность клиента.
 Сервер example.com писать не надо! Только библиотеку для работы с ним.
-
 ___
-Для запуска тестов: 
+Установка:
 
-установить зависимости: composer install
-запустить тесты: make run-tests
-___
-Для установки в проект:
+composer require i4erkasov/drom-test-comment-client
 
-composer require maksmaggot/drom-test-client
+Пример использования: 
 
-Сценарий использования: 
 ```php
 
 <?php
