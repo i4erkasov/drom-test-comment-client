@@ -5,7 +5,7 @@
          executionOrder="random"
          resolveDependencies="true">
     <testsuites>
-        <testsuite name="Client">
+        <testsuite name="CommentClientService">
             <directory>tests/</directory>
         </testsuite>
     </testsuites>

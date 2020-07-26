@@ -28,6 +28,16 @@ class CommentsRepository
     }
 
     /**
+     * @param int $id
+     *
+     * @return Comment|null
+     */
+    public function getComment(int $id): ?Comment
+    {
+        return $this->provider->getComment($id);
+    }
+
+    /**
      * @param Comment $comment
      */
     public function createComment(Comment $comment): void

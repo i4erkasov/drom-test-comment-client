@@ -48,6 +48,23 @@ class ApiCommentProvider implements CommentProviderInterface
         }
     }
 
+    public function getComment(int $id): ?Comment
+    {
+        try {
+            $response = $this->client->get("/comment/{$id}");
+
+            $comment = \GuzzleHttp\json_decode($response->getBody()->getContents(), true)['data'] ?? null;
+
+            if($comment){
+                $comment = new Comment($comment);
+            }
+
+            return $comment ?? null;
+        } catch (GuzzleException $ex) {
+            throw new ApiCommentException("Error: " . $ex->getMessage(), 0, $ex);
+        }
+    }
+
     /**
      * @param Comment $comment
      *
@@ -56,7 +73,7 @@ class ApiCommentProvider implements CommentProviderInterface
     public function createComment(Comment $comment): void
     {
         try {
-            $response = $this->client->post(
+            $this->client->post(
                 '/comment',
                 [
                     RequestOptions::JSON => [
@@ -78,7 +95,7 @@ class ApiCommentProvider implements CommentProviderInterface
     public function updateComment(Comment $comment): void
     {
         try {
-            $response = $this->client->put(
+            $this->client->put(
                 "/comment/{$comment->getId()}",
                 [
                     RequestOptions::JSON => [

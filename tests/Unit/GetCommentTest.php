@@ -2,9 +2,9 @@
 
 namespace Test\Unit;
 
-use Client\Entity\Comment;
-use Client\Provider\ApiCommentProvider;
-use Client\Repository\CommentsRepository;
+use CommentClientService\Entity\Comment;
+use CommentClientService\Provider\ApiCommentProvider;
+use CommentClientService\Repository\CommentsRepository;
 use GuzzleHttp\Client;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
@@ -36,6 +36,30 @@ class GetCommentTest extends TestCase
         $this->assertEquals($expected, $repository->getComments());
     }
 
+    /**
+     * @param int   $id
+     * @param array $data
+     * @param Comment $comment
+     *
+     * @throws \Exception
+     *
+     * @dataProvider getCommentDataProvider
+     */
+    public function testGetComment(int $id, array $data, Comment $comment)
+    {
+        $handlerStack = HandlerStack::create(new MockHandler([
+            new Response(200, [
+                'Content-Type' => 'application/json',
+            ], json_encode($data)),
+        ]));
+
+        $repository = new  CommentsRepository(
+            new ApiCommentProvider(new Client(['handler' => $handlerStack]))
+        );
+
+        $this->assertEquals($comment, $repository->getComment($id));
+    }
+
     public function getCommentsDataProvider()
     {
         return [
@@ -60,6 +84,20 @@ class GetCommentTest extends TestCase
                     new Comment(['id' => 2, 'name' => 'TestName_2', 'text' => 'Test text 2']),
                     new Comment(['id' => 3, 'name' => 'TestName_3', 'text' => 'Test text 3']),
                 ],
+            ],
+        ];
+    }
+
+    public function getCommentDataProvider()
+    {
+        return [
+            [
+                11,
+                [
+                    'status' => 'success',
+                    'data'   => ['id' => 11, 'name' => 'TestName', 'text' => 'Test text'],
+                ],
+                new Comment(['id' => 11, 'name' => 'TestName', 'text' => 'Test text']),
             ],
         ];
     }

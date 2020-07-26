@@ -1,6 +1,6 @@
 <?php
 
-namespace Client;
+namespace CommentClientService;
 
 use CommentClientService\Provider\ApiCommentProvider;
 use CommentClientService\Entity\Comment;
@@ -36,6 +36,16 @@ class ApiCommentClient
     public function getComments(): array
     {
         return $this->repository->getComments();
+    }
+
+    /**
+     * @param int $id
+     *
+     * @return Comment|null
+     */
+    public function getComment(int $id): ?Comment
+    {
+        return $this->repository->getComment($id);
     }
 
     /**

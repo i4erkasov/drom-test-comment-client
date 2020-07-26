@@ -54,4 +54,28 @@ class Comment
     {
         return $this->text;
     }
+
+    /**
+     * @param string $name
+     *
+     * @return $this
+     */
+    public function setName(string $name): self
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * @param string $text
+     *
+     * @return $this
+     */
+    public function setText(string $text): self
+    {
+        $this->text = $text;
+
+        return $this;
+    }
 }

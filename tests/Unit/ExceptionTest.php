@@ -2,10 +2,10 @@
 
 namespace Test\Unit;
 
-use Client\Entity\Comment;
-use Client\Exception\ApiCommentException;
-use Client\Provider\ApiCommentProvider;
-use Client\Repository\CommentsRepository;
+use CommentClientService\Entity\Comment;
+use CommentClientService\Exception\ApiCommentException;
+use CommentClientService\Provider\ApiCommentProvider;
+use CommentClientService\Repository\CommentsRepository;
 use GuzzleHttp\Client;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
@@ -14,7 +14,7 @@ use PHPUnit\Framework\TestCase;
 
 class ExceptionTest extends TestCase
 {
-    public function testStatusCodeExceptionGetComments()
+    public function testApiCommentExceptionGetComments()
     {
         $handlerStack = HandlerStack::create(new MockHandler([new Response(404)]));
 
@@ -27,7 +27,7 @@ class ExceptionTest extends TestCase
         $repository->getComments();
     }
 
-    public function testStatusCodeExceptionCreateComment()
+    public function testApiCommentExceptionCreateComment()
     {
         $handlerStack = HandlerStack::create(new MockHandler([new Response(404)]));
 
@@ -43,7 +43,7 @@ class ExceptionTest extends TestCase
         ]));
     }
 
-    public function testStatusCodeExceptionUpdateComment()
+    public function testApiCommentExceptionUpdateComment()
     {
         $handlerStack = HandlerStack::create(new MockHandler([new Response(404)]));
 
@@ -51,7 +51,7 @@ class ExceptionTest extends TestCase
             new ApiCommentProvider(new Client(['handler' => $handlerStack]))
         );
 
-        //$this->expectException(ApiCommentException::class);
+        $this->expectException(ApiCommentException::class);
 
         $repository->updateComment(new Comment([
             'id'   => 1,

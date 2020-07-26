@@ -2,9 +2,9 @@
 
 namespace Test\Unit;
 
-use Client\Entity\Comment;
-use Client\Provider\ApiCommentProvider;
-use Client\Repository\CommentsRepository;
+use CommentClientService\Entity\Comment;
+use CommentClientService\Provider\ApiCommentProvider;
+use CommentClientService\Repository\CommentsRepository;
 use GuzzleHttp\Client;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
