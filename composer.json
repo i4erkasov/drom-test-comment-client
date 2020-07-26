@@ -1,0 +1,29 @@
+{
+    "name": "i4erkasov/drom-test-comment-client",
+    "description": "drom test comment client",
+    "type": "libraty",
+    "require": {
+        "guzzlehttp/guzzle": "7.0.1"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "9.1"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ivan Cherkasov",
+            "email": "i.4erkasov@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "CommentClientService\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "minimum-stability": "stable"
+}
